@@ -1,18 +1,41 @@
+import { CartsModule } from './carts/carts.module';
+ import { ProductsModule } from './products/products.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { SharedModule } from './shared/shared.module';
+import { HttpClientModule } from '@angular/common/http'
+import { ProductService } from './products/services/product.service';
+
+import { CommonModule } from '@angular/common';
+import { AllProductsComponent } from './products/components/all-products/all-products.component';
+
+
+
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+
+
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SharedModule,
+    CartsModule,
+    ProductsModule,
+    HttpClientModule ,
+    CommonModule,
+
+
   ],
-  providers: [],
+  providers: [
+    ProductService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,101 @@
+@mixin btnStyle {
+  border: none;
+  border-radius: 3px;
+  background-color: #EF6C00;
+  color: #fff;
+  padding: 8px 20px;
+  font-weight: 500;
+  &:focus{
+    box-shadow: none;
+    background-color: #fff;
+      color: #EF6C00;
+      outline: 2px solid #EF6C00;
+      outline-offset: -2px;
+    }
+
+}
+@mixin  priceStyle {
+  font-size: 20px;
+  color: #F33927;
+  font-weight: 500;
+}
+.products{
+  .add{
+    @include btnStyle;
+    margin: 5px 0;
+
+  }
+  img{
+    width:100px;
+    height:80px;
+    border-radius:15px;
+  }
+  .price{
+   @include priceStyle;
+  }
+}
+table{
+  th{
+    color: #978777;
+
+  }
+}
+
+.modal{
+  textarea{
+    max-width:100% ;
+    min-width: 100%;
+    max-height: 120px;
+    min-height: 120px;
+  }
+  img{
+    width: 100%;
+    max-height: 85px;
+  }
+  .modal-footer{
+    .add{
+      @include btnStyle
+    }
+  }
+}
+//////////////style media query
+@media (max-width:768px){
+  .modal{
+    img{
+      width: 50%;
+      max-height: 70px;
+    }
+  }
+
+  table thead{
+    display: none;
+  }
+  table,table tbody,table tr,table td{
+    display:block;
+    width:100%;
+ }
+ table tr{
+    margin-bottom:15px;
+ }
+ table tbody tr td{
+     text-align:right;
+    padding-left:50%;
+    position:relative;
+ }
+ table td:before{
+  content:attr(data-label);
+   position:absolute;
+   left:0;
+   width:50%;
+   padding-left:15px;
+   font-weight:600;
+   font-size:14px;
+   text-align:left;
+  }
+}
+
+
+
+
+
+

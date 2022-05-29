@@ -1,0 +1,75 @@
+
+<div class="products">
+    <!-- Button trigger modal -->
+
+  <button type="button" class="add" (click)="checkBtn()"  data-toggle="modal" data-target="#viewProduct">
+    Add Product
+</button>
+  <table class="table table-striped table-hover">
+    <thead>
+      <th>Product</th>
+      <th>Name</th>
+      <th>Category</th>
+      <th>Price</th>
+      <th>Action</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of allProducts">
+        <td data-label="Product"><img src="{{product.image}}"></td>
+        <td data-label="Name">{{product.title}}</td>
+        <td data-label="Category">{{product.category}}</td>
+        <td data-label="Price" class="price">{{product.price}}</td>
+        <td data-label="Action"><button class="btn btn-primary" data-toggle="modal" data-target="#viewProduct"(click)="updateProduct(product)">Update</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- -------------------view modal --------------->
+
+
+<!-- Modal -->
+<div class="modal fade" id="viewProduct" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog " style="max-width: 900px !important;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel" >{{headertitle}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formInputs">
+          <div class="row">
+            <div class="col-md-4">
+              <label for="">Title</label>
+              <input type="text" class="form-control"placeholder="title" formControlName="title">
+            </div>
+            <div class="col-md-4">
+              <label for="">Price</label>
+              <input type="number" class="form-control"placeholder="price" formControlName="price">
+            </div>
+            <div class="col-md-4">
+              <app-select [data]="allCategories" [title]="'Categories'" [all]="false" (selectedValue)= "selectedCategoryItems($event)"[select]="formInputs.value.category"></app-select>
+            </div>
+            <div class="col-md-4">
+              <label for="">Image</label>
+              <img src="{{base64}}" alt="">
+              <input type="file" class="form-control"(change)="getImagePath($event)">
+
+            </div>
+            <div class="col-md-8">
+              <label for="">Description</label>
+              <textarea class="form-control"  placeholder="type here .." formControlName="description"></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+       <button class="btn add" [disabled]="!formInputs.valid" (click)="addProduct()">{{headertitle}} </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,89 @@
+<div class="cart mt-3">
+  <form [formGroup]="formsInput">
+    <div class="row">
+
+
+          <div class="col-md-3">
+            <label for="">Start Date</label>
+            <input type="date" class="form-control" formControlName="start">
+          </div>
+          <div class="col-md-3">
+            <label for=""> End Date</label>
+            <input type="date" class="form-control" formControlName="end">
+          </div>
+
+
+
+        <div class="col-md-3 d-flex align-items-end">
+          <button class="btn apply  mt-sm-3" (click)="applyFilter()">Apply</button>
+        </div>
+
+    </div>
+  </form>
+
+  <table class="table mt-2 table-striped ">
+      <thead>
+      <th>Date</th>
+        <th>Quantity</th>
+        <th>Action</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of carts;let index=index">
+
+          <td data-label="Date">{{item.date |date:'mediumDate'}}</td>
+          <td data-label="Quantity">{{item.products.length}}</td>
+          <td data-label="Action">
+
+            <button class="btn view"data-toggle="modal" data-target="#viewCart"(click)="view(index)">View</button>
+            <button class="btn delete ml-3"(click)="deleteCart(item.id)">Delete</button>
+          </td>
+
+
+        </tr>
+      </tbody>
+
+  </table>
+</div>
+<!------------------ view modal----------------- -->
+<!-- Modal -->
+<div class="modal fade" id="viewCart" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog" style="max-width: 900px!important">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Cart Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="cart">
+          <table class="table mt-3 table-striped table-hover">
+            <thead>
+              <th>Product</th>
+              <th class="text-center">Name</th>
+              <th> Price</th>
+              <th class="text-center">Quantity</th>
+              <th>Total</th>
+
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of products;let index=index">
+                <td data-label="Product">
+                  <img src="{{item.item.image}}"alt="">
+                </td>
+                <td  data-label="Name">{{item.item.title}}</td>
+                <td data-label="Price" class="price ">{{item.item.price}} L.E</td>
+                <td data-label="Quantity">{{item.quantity}}</td>
+                <td  data-label="Total"class="total">{{item.quantity*item.item.price}} L.E</td>
+
+              </tr>
+            </tbody>
+
+
+        </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
